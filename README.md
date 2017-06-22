@@ -1,3 +1,3 @@
 # Amap Maps plugin for QtLocation
-�ߵµ�ͼ plugin for QtLocation module
-
+高德地图插件 plugin for QtLocation module
+支持Qt5.9
