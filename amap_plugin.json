@@ -1,0 +1,14 @@
+{
+    "Keys": ["amap"],
+    "Provider": "amap",
+    "Version": 100,
+    "Experimental": false,
+    "Features": [
+        "OnlineGeocodingFeature",
+        "ReverseGeocodingFeature",
+        "OnlineRoutingFeature",
+        "AlternativeRoutesFeature",
+        "OnlineMappingFeature",
+        "SearchSuggestionsFeature"
+    ]
+}
