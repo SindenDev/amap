@@ -2,3 +2,4 @@
 ## 高德地图插件 plugin for QtLocation module
 * Qt地图插件
 * 跨平台支持
+* 最新支持Qt5.10.0
