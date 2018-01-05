@@ -46,11 +46,11 @@ QGeoTiledMappingManagerEngineAmap::QGeoTiledMappingManagerEngineAmap(const QVari
          types << QGeoMapType(QGeoMapType::TerrainMap, tr("Terrain"), tr("Terrain map view in daylight mode"), false, false, 3, "amap");
          types << QGeoMapType(QGeoMapType::HybridMap, tr("Hybrid"), tr("Satellite map view with streets in daylight mode"), false, false, 4, "amap");
     #else
-        QGeoCameraCapabilities cameraCapabilities;
-        types << QGeoMapType(QGeoMapType::StreetMap, tr("Road Map"), tr("Normal map view in daylight mode"), false,false, 1, "amap",cameraCapabilities);
-        types << QGeoMapType(QGeoMapType::SatelliteMapDay, tr("Satellite"), tr("Satellite map view in daylight mode"), false, false, 2, "amap",cameraCapabilities);
-        types << QGeoMapType(QGeoMapType::TerrainMap, tr("Terrain"), tr("Terrain map view in daylight mode"), false, false, 3, "amap",cameraCapabilities);
-        types << QGeoMapType(QGeoMapType::HybridMap, tr("Hybrid"), tr("Satellite map view with streets in daylight mode"), false, false, 4, "amap",cameraCapabilities);
+        //QGeoCameraCapabilities cameraCapabilities;
+        types << QGeoMapType(QGeoMapType::StreetMap, tr("Road Map"), tr("Normal map view in daylight mode"), false,false, 1, "amap",capabilities);
+        types << QGeoMapType(QGeoMapType::SatelliteMapDay, tr("Satellite"), tr("Satellite map view in daylight mode"), false, false, 2, "amap",capabilities);
+        types << QGeoMapType(QGeoMapType::TerrainMap, tr("Terrain"), tr("Terrain map view in daylight mode"), false, false, 3, "amap",capabilities);
+        types << QGeoMapType(QGeoMapType::HybridMap, tr("Hybrid"), tr("Satellite map view with streets in daylight mode"), false, false, 4, "amap",capabilities);
     #endif
 
     setSupportedMapTypes(types);
