@@ -111,7 +111,7 @@ void QGeoTileFetcherAmap::_getSessionToken()
 QGeoTiledMapReply *QGeoTileFetcherAmap::getTileImage(const QGeoTileSpec &spec)
 {
     QString surl = _getURL(spec.mapId(), spec.x(), spec.y(), spec.zoom());
-    qDebug()<<"_getURL:" << surl;
+    // qDebug()<<"_getURL:" << surl;
     QUrl url(surl);
 
     netRequest.setUrl(url);
@@ -136,7 +136,7 @@ void QGeoTileFetcherAmap::_getSecAmapWords(int x, int y, QString &sec1, QString 
 
 QString QGeoTileFetcherAmap::_getURL(int type, int x, int y, int zoom)
 {
-    qDebug() << "Type:" << type;
+    // qDebug() << "Type:" << type;
     switch (type) {
     case 0:
     case 1: //Road Map
