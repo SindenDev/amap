@@ -37,4 +37,6 @@
 	}
 ```
 
-![avatar](https://github.com/SindenDev/amap/edit/master/amap1.png)
+![](amap1.png)
+![](amap2.png)
+![](amap3.png)
