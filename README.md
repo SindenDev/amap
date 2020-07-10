@@ -36,7 +36,9 @@
 		}
 	}
 ```
-
+MapType:街景
 ![](amap1.png)
+MapType:室内
 ![](amap2.png)
+MapType:卫星
 ![](amap3.png)
