@@ -2,7 +2,7 @@
 ## 高德地图Qt插件 plugin for QtLocation module
 * Qt地图插件，使用简单方便，不用浏览器内核，运行高效迅猛；
 * 跨平台支持，（Qt Windows（MinGW, VS），Linux(桌面、嵌入式)， Android， ios, qnx都可以的而且测试过）；
-* 在线跟新下载，支持离线地图；
+* 在线更新下载，支持离线地图；
 * 由于我国家安全，GPS定位数据是加密过的，加入纠偏算法会有2m左右误差，精度要求高可以使用高德api进行在线纠偏；
 * 经过测试的最新支持Qt5.15.0；
 
@@ -17,7 +17,7 @@
 ```
 	C:\Qt\Qt5.13.2\5.13.2\mingw53_32\plugins\geoservices
 ```
-## 配合使用QML建立地图
+## 配合使用QML建立地图（example目录的测试工程）
 ```
 	import QtQuick 2.12
 	import QtQuick.Window 2.12
