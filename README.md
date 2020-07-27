@@ -14,6 +14,7 @@
 ```
 
 2.将（qtgeoservices_amap.dll 、qtgeoservices_amapd.dll）拷贝插件到Qt的 plugins\geoservices 定位插件目录
+注意：以下路径是以使用MinGW为例子
 ```
 	C:\Qt\Qt5.13.2\5.13.2\mingw53_32\plugins\geoservices
 ```
@@ -28,11 +29,13 @@
 		visible: true
 		width: 640
 		height: 480
-		title: qsTr("Hello World")
+		title: qsTr("Hello AMap")
 
 		Map{
 			anchors.fill:parent
-			plugin: Plugin{name: "amap"}
+			plugin: Plugin{
+				name: "amap" // "osm" 
+			}
 		}
 	}
 ```
