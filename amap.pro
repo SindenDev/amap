@@ -42,3 +42,6 @@ SOURCES += \
 OTHER_FILES += \
     amap_plugin.json
 
+DISTFILES += \
+    README.md
+
