@@ -1,9 +1,10 @@
 # Amap Maps plugin for QtLocation
 3D矢量地图以及overlay模型展示
 
-![腾讯微云-可执行程序下载](https://share.weiyun.com/6rOB6NAU)
+![腾讯微云-可执行程序下载]
+https://share.weiyun.com/6rOB6NAU
 
-![效果图](https://img1.imgtp.com/2022/05/09/dJppHkhy.gif)
+![效果图](example/TemperatureMap-3D高清矢量地图.gif)
 
 
 ## 高德地图Qt插件 plugin for QtLocation module
