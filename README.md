@@ -1,4 +1,11 @@
 # Amap Maps plugin for QtLocation
+3D矢量地图以及overlay模型展示
+
+![腾讯微云-可执行程序下载](https://share.weiyun.com/6rOB6NAU)
+
+![效果图](https://img1.imgtp.com/2022/05/09/dJppHkhy.gif)
+
+
 ## 高德地图Qt插件 plugin for QtLocation module
 * Qt地图插件，使用简单方便，不用浏览器内核，运行高效迅猛；
 * 跨平台支持，（Qt Windows（MinGW, MSVC）\Linux(桌面、嵌入式)\Android\IOS\QNX都可以的亲测试过）,鸿蒙（还没试过）；
