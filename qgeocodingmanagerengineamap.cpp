@@ -127,6 +127,12 @@ void QGeoCodingManagerEngineAmap::replyFinished()
 void QGeoCodingManagerEngineAmap::replyError(QGeoCodeReply::Error errorCode, const QString &errorString)
 {
     QGeoCodeReply *reply = qobject_cast<QGeoCodeReply *>(sender());
-    if (reply)
-        emit error(reply, errorCode, errorString);
+    if (reply){
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+        Q_EMIT errorOccurred(reply, errorCode, errorString);
+#else
+        Q_EMIT error(reply, errorCode, errorString);
+#endif
+
+    }
 }

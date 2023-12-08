@@ -10,8 +10,13 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QTime>
+#include <QNetworkRequest>
 #include <QNetworkProxy>
 #include <QtCore/QJsonDocument>
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+    #include <QRegularExpression>
+#endif
 
 #include <math.h>
 
@@ -198,7 +203,28 @@ void QGeoTileFetcherAmap::_amapVersionCompleted()
         return;
     }
     QString html = QString(_amapReply->readAll());
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+    QRegularExpression reg("\"*https?://mt\\D?\\d..*/vt\\?lyrs=m@(\\d*)", QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch match = reg.match(html);
+    if (match.hasMatch()) {
+        QStringList gc = match.capturedTexts();
+        _versionAmapMap = QString("m@%1").arg(gc[1]);
+    }
+    reg = QRegularExpression("\"*https?://khm\\D?\\d.amap.com/kh\\?v=(\\d*)", QRegularExpression::CaseInsensitiveOption);
+    match = reg.match(html);
+    if (match.hasMatch()) {
+        QStringList gc = match.capturedTexts();
+        _versionAmapSatellite = gc[1];
+    }
 
+    reg = QRegularExpression("\"*https?://mt\\D?\\d..*/vt\\?lyrs=t@(\\d*),r@(\\d*)", QRegularExpression::CaseInsensitiveOption);
+    match = reg.match(html);
+    if (match.hasMatch()) {
+        QStringList gc = match.capturedTexts();
+        _versionAmapTerrain = QString("t@%1,r@%2").arg(gc[1]).arg(gc[2]);
+    }
+
+#else
     QRegExp reg("\"*https?://mt\\D?\\d..*/vt\\?lyrs=m@(\\d*)", Qt::CaseInsensitive);
     if (reg.indexIn(html) != -1) {
         QStringList gc = reg.capturedTexts();
@@ -214,7 +240,7 @@ void QGeoTileFetcherAmap::_amapVersionCompleted()
         QStringList gc = reg.capturedTexts();
         _versionAmapTerrain = QString("t@%1,r@%2").arg(gc[1]).arg(gc[2]);
     }
-
+#endif
     _amapReply->deleteLater();
     _amapReply = NULL;
 }
@@ -243,8 +269,13 @@ void QGeoTileFetcherAmap::_tryCorrectAmapVersions(QNetworkAccessManager* network
         _amapReply = networkManager->get(qheader);
         connect(_amapReply, &QNetworkReply::finished, this, &QGeoTileFetcherAmap::_amapVersionCompleted);
         connect(_amapReply, &QNetworkReply::destroyed, this, &QGeoTileFetcherAmap::_replyDestroyed);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+        connect(_amapReply, &QNetworkReply::errorOccurred,
+                this, &QGeoTileFetcherAmap::_networkReplyError);
+#else
         connect(_amapReply, static_cast<void (QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::error),
                 this, &QGeoTileFetcherAmap::_networkReplyError);
+#endif
         networkManager->setProxy(proxy);
     }
 }

@@ -1,6 +1,9 @@
 #include "qplacesearchreplyamap.h"
 #include "qplacemanagerengineamap.h"
-
+#include <QPlace>
+#include <QPlaceIcon>
+#include <QGeoAddress>
+#include <QGeoLocation>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonObject>
@@ -38,7 +41,12 @@ void QPlaceSearchReplyAmap::abort()
 void QPlaceSearchReplyAmap::setError(QPlaceReply::Error errorCode, const QString &errorString)
 {
     QPlaceReply::setError(errorCode, errorString);
-    emit error(errorCode, errorString);
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+    Q_EMIT errorOccurred(errorCode, errorString);
+#else
+    Q_EMIT error(errorCode, errorString);
+#endif
     setFinished(true);
     emit finished();
 }
@@ -163,8 +171,11 @@ QPlaceResult QPlaceSearchReplyAmap::parsePlaceResult(const QJsonObject &item) co
     QGeoLocation location;
     location.setCoordinate(coordinate);
     location.setAddress(address);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+    location.setBoundingShape(parseBoundingBox(item.value(QStringLiteral("boundingbox")).toArray()));
+#else
     location.setBoundingBox(parseBoundingBox(item.value(QStringLiteral("boundingbox")).toArray()));
-
+#endif
     place.setLocation(location);
 
     QPlaceResult result;

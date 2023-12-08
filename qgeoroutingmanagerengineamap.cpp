@@ -36,7 +36,12 @@ QGeoRouteReply* QGeoRoutingManagerEngineAmap::calculateRoute(const QGeoRouteRequ
 
     if (m_apiKey.isEmpty()) {
         QGeoRouteReply *reply = new QGeoRouteReply(QGeoRouteReply::UnsupportedOptionError, "Set amap.route.apikey with amap maps application key, supporting directions", this);
-        emit error(reply, reply->error(), reply->errorString());
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+        Q_EMIT errorOccurred(reply, reply->error(), reply->errorString());
+#else
+        Q_EMIT error(reply, reply->error(), reply->errorString());
+#endif
         return reply;
     }
 
@@ -126,6 +131,11 @@ void QGeoRoutingManagerEngineAmap::replyError(QGeoRouteReply::Error errorCode,
                                              const QString &errorString)
 {
     QGeoRouteReply *reply = qobject_cast<QGeoRouteReply *>(sender());
-    if (reply)
-        emit error(reply, errorCode, errorString);
+    if (reply){
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+        Q_EMIT errorOccurred(reply, errorCode, errorString);
+#else
+        Q_EMIT error(reply, errorCode, errorString);
+#endif
+    }
 }

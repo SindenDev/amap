@@ -90,7 +90,12 @@ void QGeoCodeReplyAmap::networkReplyFinished()
                     QGeoRectangle r;
                     r.setTopRight(constructCoordiante(jaddressRanges.value("northeast").toObject()));
                     r.setBottomLeft(constructCoordiante(jaddressRanges.value("southwest").toObject()));
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+                    location.setBoundingShape(r);
+#else
                     location.setBoundingBox(r);
+#endif
+
                 }
 
                 QJsonArray jaddress = o.value("address_components").toArray();

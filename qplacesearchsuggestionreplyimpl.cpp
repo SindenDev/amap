@@ -69,7 +69,12 @@ void QPlaceSearchSuggestionReplyImpl::setError(QPlaceReply::Error error_,
                                                const QString &errorString)
 {
     QPlaceReply::setError(error_, errorString);
-    emit error(error_, errorString);
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+    Q_EMIT errorOccurred(error_, errorString);
+#else
+    Q_EMIT error(error_, errorString);
+#endif
     setFinished(true);
     emit finished();
 }
@@ -90,7 +95,12 @@ void QPlaceSearchSuggestionReplyImpl::replyFinished()
     QJsonDocument document = QJsonDocument::fromJson(m_reply->readAll());
     if (!document.isObject()) {
         setError(ParseError, QCoreApplication::translate(NOKIA_PLUGIN_CONTEXT_NAME, PARSE_ERROR));
-        emit error(error(), errorString());
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+        Q_EMIT errorOccurred(error(), errorString());
+#else
+        Q_EMIT error(error(), errorString());
+#endif
         return;
     }
 

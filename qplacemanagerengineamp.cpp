@@ -1,8 +1,11 @@
 #include "qplacemanagerengineamap.h"
 #include "qplacesearchreplyamap.h"
 #include "qplacecategoriesreplyamap.h"
+#include "qplacesearchrequest.h"
 #include "qplacesearchsuggestionreplyimpl.h"
 
+#include <QPlaceCategory>
+#include <QRegularExpressionMatch>
 #include <QtCore/QUrlQuery>
 #include <QtCore/QXmlStreamReader>
 #include <QtCore/QRegularExpression>
@@ -113,6 +116,7 @@ QPlaceSearchReply *QPlaceManagerEngineAmap::search(const QPlaceSearchRequest &re
     bool unsupported = false;
 
     // Only public visibility supported
+
     unsupported |= request.visibilityScope() != QLocation::UnspecifiedVisibility &&
                    request.visibilityScope() != QLocation::PublicVisibility;
     unsupported |= request.searchTerm().isEmpty() && request.categories().isEmpty();
@@ -322,11 +326,19 @@ void QPlaceManagerEngineAmap::categoryReplyFinished()
             QRegularExpressionMatchIterator i = regex.globalMatch(page);
             while (i.hasNext()) {
                 QRegularExpressionMatch match = i.next();
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+                QString name = match.captured(1);
+                QString tagKey = match.captured(2);
+                QString tagValue = match.captured(3);
+                QString op = match.captured(4);
+                QString plural = match.captured(5);
+#else
                 QString name = match.capturedRef(1).toString();
                 QString tagKey = match.capturedRef(2).toString();
                 QString tagValue = match.capturedRef(3).toString();
                 QString op = match.capturedRef(4).toString();
                 QString plural = match.capturedRef(5).toString();
+#endif
 
                 // Only interested in any operator plural forms
                 if (op != QLatin1String("-") || plural != QLatin1String("Y"))
@@ -384,8 +396,13 @@ void QPlaceManagerEngineAmap::replyFinished()
 void QPlaceManagerEngineAmap::replyError(QPlaceReply::Error errorCode, const QString &errorString)
 {
     QPlaceReply *reply = qobject_cast<QPlaceReply *>(sender());
-    if (reply)
-        emit error(reply, errorCode, errorString);
+    if (reply){
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+        Q_EMIT errorOccurred(reply, errorCode, errorString);
+#else
+        Q_EMIT error(reply, errorCode, errorString);
+#endif
+    }
 }
 
 void QPlaceManagerEngineAmap::fetchNextCategoryLocale()
