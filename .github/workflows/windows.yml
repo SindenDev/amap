@@ -57,7 +57,6 @@ jobs:
           set VCVARS="C:\Program Files (x86)\Microsoft Visual Studio\%VS%\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
           if not exist %VCVARS% set VCVARS="C:\Program Files\Microsoft Visual Studio\%VS%\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
           call %VCVARS% ${{ matrix.msvc_arch }}
-
           qmake
           nmake
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
@@ -78,7 +77,7 @@ jobs:
            $name = ${env:archiveName}
            echo "::set-output name=packageName::$name"
       # 上传artifacts          
-      - uses: actions/upload-artifact@v4.3.6
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.package.outputs.packageName }}
           path: ${{ steps.package.outputs.packageName }}.zip
