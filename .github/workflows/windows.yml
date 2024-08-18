@@ -20,12 +20,14 @@ jobs:
         include:
           - qt_ver: 5.15.2          
             qt_arch: win64_msvc2019_64
-            msvc_arch: x64
             qt_arch_install: msvc2019_64
-          - qt_ver: 6.7.2          
-            qt_arch: win64_msvc2019_64
             msvc_arch: x64
-            qt_arch_install: msvc2019_64           
+            vs: ['2019']
+          - qt_ver: 6.7.2          
+            qt_arch: win64_msvc2019_64            
+            qt_arch_install: msvc2019_64
+            msvc_arch: x64
+            vs: ['2019']       
     env:
       targetName: amap
     # 步骤
@@ -51,7 +53,11 @@ jobs:
         id: build
         shell: cmd
         run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          set VS=${{ matrix.vs }}
+          set VCVARS="C:\Program Files (x86)\Microsoft Visual Studio\%VS%\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
+          if not exist %VCVARS% set VCVARS="C:\Program Files\Microsoft Visual Studio\%VS%\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
+          call %VCVARS% ${{ matrix.msvc_arch }}
+
           qmake
           nmake
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
