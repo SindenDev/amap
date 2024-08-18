@@ -18,10 +18,6 @@ jobs:
       # 矩阵配置
       matrix:
         include:
-          - qt_ver: 5.15.2          
-            qt_arch: win64_msvc2019_64
-            msvc_arch: x64
-            qt_arch_install: msvc2019_64
           - qt_ver: 6.7.2          
             qt_arch: win64_msvc2019_64
             msvc_arch: x64
