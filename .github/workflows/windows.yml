@@ -13,7 +13,7 @@ jobs:
     name: Build
     # 运行平台， windows-latest目前是windows server 2019 
     # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
-    runs-on: windows-latest
+    runs-on: windows-2019
     strategy:
       # 矩阵配置
       matrix:
@@ -22,12 +22,10 @@ jobs:
             qt_arch: win64_msvc2019_64
             qt_arch_install: msvc2019_64
             msvc_arch: x64
-            vs: ['2019']
           - qt_ver: 6.7.2          
             qt_arch: win64_msvc2019_64            
             qt_arch_install: msvc2019_64
-            msvc_arch: x64
-            vs: ['2019']       
+            msvc_arch: x64   
     env:
       targetName: amap
     # 步骤
@@ -53,10 +51,7 @@ jobs:
         id: build
         shell: cmd
         run: |
-          set VS=${{ matrix.vs }}
-          set VCVARS="C:\Program Files (x86)\Microsoft Visual Studio\%VS%\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
-          if not exist %VCVARS% set VCVARS="C:\Program Files\Microsoft Visual Studio\%VS%\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
-          call %VCVARS% ${{ matrix.msvc_arch }}
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake
           nmake
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
