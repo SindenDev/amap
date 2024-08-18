@@ -94,6 +94,8 @@ static QGeoManeuver::InstructionDirection gmapsInstructionDirection(const QStrin
 }
 
 
+
+
 QGeoRouteReplyAmap::QGeoRouteReplyAmap(QNetworkReply *reply, const QGeoRouteRequest &request,
                                      QObject *parent)
     :   QGeoRouteReply(request, parent), m_reply(reply)
