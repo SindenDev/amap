@@ -55,8 +55,7 @@ jobs:
       - name: msvc-build
         id: build
         shell: cmd
-        run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+        run: |        
           qmake
           nmake
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
