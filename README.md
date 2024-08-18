@@ -1,12 +1,5 @@
 # Amap Maps plugin for QtLocation
-3D矢量地图以及overlay模型展示
-
-![腾讯微云-可执行程序下载]
-https://share.weiyun.com/6rOB6NAU
-
-![效果图](example/TemperatureMap-3D高清矢量地图.gif)
-
-
+Support Qt5、Qt6
 ## 高德地图Qt插件 plugin for QtLocation module
 * Qt地图插件，使用简单方便，不用浏览器内核，运行高效迅猛；
 * 跨平台支持，（Qt Windows（MinGW, MSVC）\Linux(桌面、嵌入式)\Android\IOS\QNX都可以的亲测试过）,鸿蒙（还没试过）；
@@ -52,3 +45,9 @@ MapType:室内
 ![](example/amap2.png)
 MapType:卫星
 ![](example/amap3.png)
+
+3D矢量地图以及overlay模型展示
+
+![效果图](example/TemperatureMap-3D高清矢量地图.gif)
+![效果图](example/example3Dbuilds.mp4)
+
