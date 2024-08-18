@@ -8,8 +8,13 @@ class QGeoServiceProviderFactoryAmap: public QObject, public QGeoServiceProvider
 {
     Q_OBJECT
     Q_INTERFACES(QGeoServiceProviderFactory)
-    Q_PLUGIN_METADATA(IID "org.qt-project.qt.geoservice.serviceproviderfactory/5.0"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    Q_PLUGIN_METADATA(IID "org.qt-project.qt.geoservice.serviceproviderfactory/6.0"
                       FILE "amap_plugin.json")
+#elif
+    Q_PLUGIN_METADATA(IID  "org.qt-project.qt.geoservice.serviceproviderfactory/5.0"
+                      FILE "amap_plugin.json")
+#endif
 
 public:
     QGeoCodingManagerEngine *createGeocodingManagerEngine(const QVariantMap &parameters,

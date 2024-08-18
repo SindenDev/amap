@@ -1,7 +1,7 @@
 ﻿{
     "Keys": ["amap"],
     "Provider": "amap",
-    "Version": 200,
+    "Version": 300,
     "Experimental": false,
     "Features": [
         "OnlineGeocodingFeature",

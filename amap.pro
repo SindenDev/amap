@@ -4,8 +4,8 @@ QT += location-private positioning-private network
 PLUGIN_TYPE = geoservices
 PLUGIN_CLASS_NAME = QGeoServiceProviderFactoryAmap
 greaterThan(QT_MAJOR_VERSION, 5){
-    # TEMPLATE = lib
-    # CONFIG += plugin c++17
+    TEMPLATE = lib
+    CONFIG += plugin c++17
 }else{
     load(qt_plugin)
 }
