@@ -47,6 +47,5 @@ MapType:卫星
 ![](example/amap3.png)
 
 3D矢量地图以及overlay模型展示
-
+![效果图](example/example3Dbuilds.gif)
 ![效果图](example/TemperatureMap-3D高清矢量地图.gif)
-example/example3Dbuilds.mp4
