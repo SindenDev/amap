@@ -1,4 +1,5 @@
-# Amap Maps plugin for QtLocation[Support Qt5、Qt6]
+# Amap Maps plugin for QtLocation
+## [Support Qt5、Qt6]
 
 ## 高德地图Qt插件 plugin for QtLocation module
 * Qt地图插件，使用简单方便，不用浏览器内核，运行高效迅猛；
