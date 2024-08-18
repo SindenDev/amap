@@ -49,5 +49,4 @@ MapType:卫星
 3D矢量地图以及overlay模型展示
 
 ![效果图](example/TemperatureMap-3D高清矢量地图.gif)
-![效果图](example/example3Dbuilds.mp4)
-
+example/example3Dbuilds.mp4
