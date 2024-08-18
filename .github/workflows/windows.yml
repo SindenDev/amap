@@ -18,11 +18,6 @@ jobs:
       # 矩阵配置
       matrix:
         include:
-          - qt_ver: 5.12.10            
-            qt_arch: win64_msvc2017_64
-            msvc_arch: x64
-            qt_arch_install: msvc2017_64
-          # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
           - qt_ver: 5.15.2          
             qt_arch: win64_msvc2019_64
             msvc_arch: x64
@@ -55,7 +50,8 @@ jobs:
       - name: msvc-build
         id: build
         shell: cmd
-        run: |        
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake
           nmake
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
