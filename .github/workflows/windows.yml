@@ -19,9 +19,9 @@ jobs:
       matrix:
         include:
           - qt_ver: 5.12.10            
-            qt_arch: win64_msvc2017_64
+            qt_arch: win64_msvc2019_64
             msvc_arch: x64
-            qt_arch_install: msvc2017_64
+            qt_arch_install: msvc2019_64
           # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
           - qt_ver: 5.15.2          
             qt_arch: win64_msvc2019_64
@@ -38,7 +38,7 @@ jobs:
       # 安装Qt
       - name: Install Qt
         # 使用外部action。这个action专门用来安装Qt
-        uses: jurplel/install-qt-action@v2.13.0
+        uses: jurplel/install-qt-action@v4
         with:
           # Version of Qt to install
           version: ${{ matrix.qt_ver }}
@@ -47,7 +47,7 @@ jobs:
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
       # 拉取代码
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: 'true'
@@ -77,14 +77,14 @@ jobs:
            $name = ${env:archiveName}
            echo "::set-output name=packageName::$name"
       # 上传artifacts          
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4.3.6
         with:
           name: ${{ steps.package.outputs.packageName }}
           path: ${{ steps.package.outputs.packageName }}.zip
       # tag 上传Release
       - name: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')
-        uses: svenstaro/upload-release-action@v2
+        uses: svenstaro/upload-release-action@v2.9.0
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
