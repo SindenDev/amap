@@ -57,6 +57,8 @@ jobs:
           echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
           echo vcToolsInstallDir=%VCToolsInstallDir% >> %GITHUB_ENV%
           echo vcToolsRedistDir=%VCToolsRedistDir% >> %GITHUB_ENV%
+          mkdir -p plugins\geoservices
+          cp -p release\qtgeoservices_amap.dll plugins\geoservices\qtgeoservices_amap.dll
       # tag 打包
       - name: package
         id: package

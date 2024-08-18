@@ -27,7 +27,7 @@ Write-Host "scriptDir" $scriptDir
 
 function Main() {
     # 打包zip
-    Compress-Archive -Path "release" $archiveName'.zip'
+    Compress-Archive -Path "plugins" $archiveName'.zip'
 }
 
 if ($null -eq $archiveName || $null -eq $targetName) {
